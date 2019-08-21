@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工资导入界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--引入 jQuery Mobile 样式    -->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="layui-v2.5.4/layui/css/layui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="ztree/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="ztree/css/metroStyle/metroStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<style>
+    .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper{
+        text-shadow: 0 0px 0 #fff;
+    }
+    .panel-info .panel-body{
+        margin-top: 20px;
+        background-color: rgba(57,61,73,0.8);
+        border-radius: 25px;
+    }
+
+    .panel-info{
+        text-align: center;
+    }
+
+    .edit{
+        margin: 10px 20px;
+        width: 100px;
+    }
+
+    .layui-form{
+        text-align: center;
+    }
+    .layui-form-checkbox i{
+        border: none;
+    }
+
+    #salarySlip{
+        text-align: center;
+    }
+    #salarySlip th{
+        vertical-align: middle;
+    }
+    .ui-content{
+        padding: 0px;
+    }
+</style>
+<body>
+<div data-role="page">
+    <div data-role="main" class="ui-content">
+                <div id = "salarySlip">
+                    <table class="layui-table" lay-even lay-skin="line"  id= "salarySlipTable">
+                        <tr>
+                            <th>工号</th>
+                            <th>姓名</th>
+                            <th>级别</th>
+                            <th>高新技术补贴</th>
+                            <th>请假扣款</th>
+                            <th>基本薪酬</th>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>住房补贴</th>
+                            <th>违纪扣款</th>
+                            <th>加班薪酬</th>
+                            <th>交通补贴</th>
+                            <th>五险一金</th>
+                            <th>应发工资</th>
+                            <th>实发工资</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="layui-row grid-demo ">
+                    <div class="panel panel-info ">
+                        <div class="panel-body">
+                            <form class="layui-form" action="">
+                                <div class="btn-group">
+                                    <!--复选框-->
+                                        <input type="checkbox" name="checkbox" class="checkbox" title="级别" checked  id = "111111">
+                                        <input type="checkbox" name="checkbox" class="checkbox" title="高新技术补贴" >
+                                        <input type="checkbox" name="checkbox" class="checkbox" title="请假扣款" checked>
+                                        <input type="checkbox" name="checkbox" title="基本薪酬" class="checkbox">
+                                        <input type="checkbox" name="checkbox" title="住房补贴" class="checkbox">
+                                        <input type="checkbox" name="checkbox" title="违纪扣款" class="checkbox">
+                                        <input type="checkbox" name="checkbox" title="加班薪酬" checked class="checkbox">
+                                        <input type="checkbox" name="checkbox" title="交通补贴" checked class="checkbox">
+
+                                        <input type="checkbox" name="checkbox" title="五险一金" checked class="checkbox">
+                                        <input type="checkbox" name="checkbox" title="应发工资" class="checkbox">
+                                        <input type="checkbox" name="checkbox" title="实发工资" checked class="checkbox">
+                                </div>
+
+                                <div class="layui-form-item layui-col-space30">
+                                        <div class="grid-demo" style="text-align: center">
+                                            <button type="reset" class="layui-btn layui-btn-normal" data-role="none">重置</button>
+                                        </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row grid-demo">
+                    <!--显示-->
+                    <div class="panel panel-info">
+                        <div class="panel-body">
+                            <!--按钮组-->
+                            <div class="layui-row layui-col-space10" style="text-align: center">
+
+                                    <button type="button" data-toggle="modal" data-target="#myModalImport" class="layui-btn edit" id = "importPersion" title = "添加导入人员名单" data-role="none">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+
+                                    <button type="button" class="layui-btn edit " title="确定" id="peopleImportConfirm" data-role="none">
+                                        <i class="layui-icon">&#xe605</i>
+                                    </button>
+
+                            </div>
+                            <div id = "excelPanel">
+                                <table class="layui-table" lay-even lay-skin="line" id = "peopleTable">
+                                    <colgroup>
+                                        <col width="200">
+                                        <col width="150">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th>工号</th>
+                                        <th>姓名</th>
+                                        <th>级别</th>
+                                        <th>高新技术补贴</th>
+                                        <th>请假扣款</th>
+                                        <th>基本薪酬</th>
+                                        <th>住房补贴</th>
+                                    </tr>
+                                    <tr>
+                                        <th>违纪扣款</th>
+                                        <th>加班薪酬</th>
+                                        <th>交通补贴</th>
+                                        <th>五险一金</th>
+                                        <th>应发工资</th>
+                                        <th>实发工资</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div data-role="footer">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="archivesManagement.html" data-ajax="false" class="ui-btn ui-btn-b ui-icon-info ui-btn-icon-left">档案</a></li>
+                <li><a href="wageManagement_theImportInterface.html" data-ajax="false" class="ui-btn ui-btn-b ui-icon-tag ui-btn-icon-left">工资</a></li>
+                <li><a href="main.html" data-ajax="false" class="ui-btn ui-btn-b">导航栏</a></li>
+                <li><a href="appraisalManagement.html" data-ajax="false" class="ui-btn ui-btn-b ui-icon-mail ui-btn-icon-left">表</a></li>
+                <li><a href="appraisalChart.html" data-ajax="false" class="ui-btn ui-btn-b ui-icon-user ui-btn-icon-left">图</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--添加模态框-->
+<div class="modal fade" id="modalAdd">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body" id = "modalAddName">
+                <input type="text" placeholder="输入名称" id = "addInput" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" class = "closeModal">取消</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id = "modalAddconfirm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    导入人员模态框-->
+<div class="modal fade" id="myModalImport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabelImport">导入人员名单</h4>
+            </div>
+            <div class = "navigation" id = "importFatherNode">
+                <div class="zTreeDemoBackground left">
+                    <ul id="treeCheck" class="ztreeCkeck"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id = "confimImport">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--确定导入模态框-->
+<div class="modal fade" id="modalImport">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">确认导入？</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" class = "closeModal">取消</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id = "importConfirm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table id="demo" lay-filter="test"></table>
+<script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- 引入 jQuery Mobile 库 -->
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="ztree/js/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="ztree/js/jquery.ztree.excheck.min.js"></script>
+<script type="text/javascript" src="ztree/js/jquery.ztree.exedit.min.js"></script>
+<script src="layui-v2.5.4/layui/layui.js"></script>
+<script src="js/salary.js"></script>
+<script src = "js/wageManagement_theImportInterface.js"></script>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+</html>

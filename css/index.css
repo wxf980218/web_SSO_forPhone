@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/*ztree样式*/
+
+ul.ztree{
+    width: auto;
+    background-color: transparent;
+    border: none!important;
+}
+.leftNavbar{
+    margin: 0 auto;
+}
+.navbar-header{
+    background-color: rgba(1,1,1,0);
+}
+
+/*footer样式*/
+.ui-btn{
+    border-width: 0;
+    border-style: none;
+}
+
+
+/*档案管理界面的CSS代码*/
+
+/*超链接样式*/
+a:link{
+    text-decoration: none;
+}
+a:hover{
+    color: white;
+}
+
+
+h4.panel-title{
+    text-align: center;
+}
+/*树状导航栏样式*/
+
+
+
+
+/*导航样式*/
+.panel{
+    border: 0;
+    background-color: transparent;
+}
+
+.panel-title{
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5px;
+     /*设置block、与行高一致，可以使文字上下居中*/
+}
+
+.panel-heading{
+    border-radius: 20px;
+    background: rgb(153,204,255);
+    color: #000000;
+    border: none;
+    -webkit-transition: color 0.5s, background-color 0.5s; /*Chrome内核*/
+}
+.panel-heading:hover{
+    background-color: #000000;
+    color: white;
+}
+
+
+
+/*    树状导航上端的搜索*/
+
+.anotherSearch input.form-control{
+    border-radius: 15px;
+    height: 32px;
+}
+
+/*档案名片设计*/
+.head{
+    height: 50px;
+    border-radius: 10px 10px 0 0 ;
+    background-color: #2aabd2;
+}
+#rightMain #name{
+    disabled: disabled;
+}
+/*表格设计*/
+table{
+    text-align: center;
+}
+table td{
+    padding: 0!important;
+}
+.table tbody tr td{
+    vertical-align: middle;
+}
+table h4{
+    font-size: 1.3em;
+    font-weight: 600!important;
+    text-align: left;
+}
+table .form-control{
+    border-style: none!important;
+    border-radius: 0;
+    text-align: center;
+}
+select.selectpicker.form-control{
+    border-style: none!important;
+    border-radius: 0;
+}
+table #conf{
+}
+.btn{
+    padding: 0;
+}
+/*设置不可编辑状态下的背景色为透明*/
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+    background-color: transparent;
+}
+/*    上传图片*/
+#demo1.layui-upload-img{
+    width: 100px;
+    height: 120px;
+    border: transparent!important;
+}
+.layui-btn{
+    width: auto;
+    height: auto;
+    font-size: 1.2em;
+    line-height: normal;
+}
+/*    城市联动*/
+#s_province,#4321{
+    border: transparent;
+    float: left;
+}
+#s_city,#1234{
+    border: transparent;
+    float: left;
+}
+
+
+
+/*工资管理*/
+/*工资管理导航条*/
+ul.ztreeCkeck{
+    height: 362px;
+    /*background-color: red;*/
+    overflow-x: scroll;
+}
+ul.ztreeCkeck::-webkit-scrollbar {
+    width: 5px;
+}
+ul.ztreeCkeck::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.6);
+     background: rgba(0,0,0,1);
+}
